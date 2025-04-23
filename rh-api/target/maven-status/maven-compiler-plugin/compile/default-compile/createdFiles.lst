@@ -1,0 +1,5 @@
+com\sales\rh\controller\FuncionarioController.class
+com\sales\rh\model\Funcionario.class
+com\sales\rh\repository\FuncionarioRepository.class
+com\sales\rh\RhApiApplication.class
+com\sales\rh\model\StatusFuncionario.class

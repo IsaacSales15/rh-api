@@ -19,6 +19,7 @@ public class FuncionarioController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Funcionario> listar() {
         return funcionarioRepository.findAll();
     }
@@ -33,9 +34,10 @@ public class FuncionarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public Funcionario cadastrar(@RequestBody Funcionario funcionario) {
             return funcionarioRepository.save(funcionario);
-
     }
+
     @PutMapping("/{funcionarioId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Funcionario> atualizar(@PathVariable Long funcionarioId, @RequestBody Funcionario funcionario) {
 
         if(!funcionarioRepository.existsById(funcionarioId)) {
