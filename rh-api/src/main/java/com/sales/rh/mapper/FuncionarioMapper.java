@@ -1,4 +1,4 @@
-package com.sales.mapper;
+package com.sales.rh.mapper;
 
 import com.sales.rh.model.Funcionario;
 import com.sales.rh.dto.FuncionarioRequestDTO;
@@ -15,7 +15,7 @@ public class FuncionarioMapper {
                 f.getStatus());
     }
 
-    private Funcionario fromDTO(FuncionarioRequestDTO dto) {
+    public static Funcionario fromDTO(FuncionarioRequestDTO dto) {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(dto.getNome());
         funcionario.setEmail(dto.getEmail());        

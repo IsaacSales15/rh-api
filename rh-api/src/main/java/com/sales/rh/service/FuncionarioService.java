@@ -4,6 +4,7 @@ import com.sales.rh.dto.FuncionarioRequestDTO;
 import com.sales.rh.dto.FuncionarioResponseDTO;
 import com.sales.rh.model.Funcionario;
 import com.sales.rh.repository.FuncionarioRepository;
+import com.sales.rh.mapper.FuncionarioMapper;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,14 @@ public class FuncionarioService {
 
     public FuncionarioService(FuncionarioRepository funcionarioRepository){
         this.funcionarioRepository = funcionarioRepository;
+    }
+
+    private FuncionarioResponseDTO toDTO(Funcionario funcionario) {
+        return FuncionarioMapper.toDTO(funcionario);
+    }
+    
+    private Funcionario fromDTO(FuncionarioRequestDTO dto) {
+        return FuncionarioMapper.fromDTO(dto);
     }
 
     public FuncionarioResponseDTO cadastrar(FuncionarioRequestDTO dto) {
@@ -42,27 +51,6 @@ public class FuncionarioService {
         funcionario.setId(id);
         Funcionario salvo = funcionarioRepository.save(funcionario);
         return toDTO(salvo);
-    }
-    
-    private Funcionario fromDTO(FuncionarioRequestDTO dto) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(dto.getNome());
-        funcionario.setEmail(dto.getEmail());        
-        funcionario.setSalario(dto.getSalario());
-        funcionario.setDataAdmissao(dto.getDataAdmissao());
-        funcionario.setStatus(dto.getStatus());
-        return funcionario;
-    }
-
-    private FuncionarioResponseDTO toDTO(Funcionario funcionario) {
-        return new FuncionarioResponseDTO(
-                funcionario.getId(),
-                funcionario.getNome(),
-                funcionario.getEmail(),
-                funcionario.getSalario(),
-                funcionario.getDataAdmissao(),
-                funcionario.getStatus()
-        );
-    }
+    }    
 
 }
