@@ -1,7 +1,11 @@
 package com.sales.rh.controller;
 
-import com.sales.rh.model.Funcionario;
-import com.sales.rh.repository.FuncionarioRepository;
+import com.sales.rh.dto.FuncionarioRequestDTO;
+import com.sales.rh.dto.FuncionarioResponseDTO;
+import com.sales.rh.service.FuncionarioService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,43 +16,34 @@ import java.util.List;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
 
-    private final FuncionarioRepository funcionarioRepository;
+    private final FuncionarioService service;
 
-    public FuncionarioController(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
+    public FuncionarioController(FuncionarioService service) {
+        this.service = service;
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Funcionario> listar() {
-        return funcionarioRepository.findAll();
+    public List<FuncionarioResponseDTO> listar() {
+        return service.listar();
     }
 
     @GetMapping("/{funcionarioId}")
-    public ResponseEntity<Funcionario> buscar(@PathVariable Long funcionarioId) {
-        return funcionarioRepository.findById(funcionarioId).map(funcionario -> ResponseEntity.ok(funcionario)).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<FuncionarioResponseDTO> buscar(@PathVariable Long id) {
+        FuncionarioResponseDTO dto = service.buscarPorId(id);
+        return (dto != null) ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
-
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Funcionario cadastrar(@RequestBody Funcionario funcionario) {
-            return funcionarioRepository.save(funcionario);
+    public ResponseEntity<FuncionarioResponseDTO> cadastrar(@RequestBody FuncionarioRequestDTO dto) {
+        FuncionarioResponseDTO response = service.cadastrar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{funcionarioId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Funcionario> atualizar(@PathVariable Long funcionarioId, @RequestBody Funcionario funcionario) {
-
-        if(!funcionarioRepository.existsById(funcionarioId)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        funcionario.setId(funcionarioId);
-        Funcionario funcionarioAtualizado = funcionarioRepository.save(funcionario);
-
-        return ResponseEntity.ok(funcionarioAtualizado);
-
+      public ResponseEntity<FuncionarioResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody FuncionarioRequestDTO dto) {
+        FuncionarioResponseDTO atualizado = service.atualizar(id, dto);
+        return (atualizado != null) ? ResponseEntity.ok(atualizado) : ResponseEntity.notFound().build();
     }
 
 }
