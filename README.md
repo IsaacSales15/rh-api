@@ -21,6 +21,20 @@ cd seu-repositorio
 ./mvnw spring-boot:run
 </code></pre>
 
+<hr>
+
+<h2>📦 Estrutura do Projeto</h2>
+<ul>
+  <li><b>controller</b>: camadas de controle da API (<code>FuncionarioController</code>)</li>
+  <li><b>service</b>: regras de negócio (<code>FuncionarioService</code>)</li>
+  <li><b>dto</b>: objetos de entrada/saída da API</li>
+  <li><b>model</b>: entidade <code>Funcionario</code> e enum <code>StatusFuncionario</code></li>
+  <li><b>mapper</b>: conversão entre DTO e entidade</li>
+  <li><b>repository</b>: interface JPA para acesso ao banco de dados</li>
+</ul>
+
+<hr>
+
 <h2>🚀 Endpoints</h2>
 
 <h3>🔹 GET /funcionarios</h3>
@@ -91,19 +105,6 @@ cd seu-repositorio
 <b>Resposta (200 OK):</b> Funcionário atualizado com sucesso. <br>
 <b>Resposta (404 Not Found):</b> Funcionário não encontrado.
 
-<hr>
-
-<h2>📦 Estrutura do Projeto</h2>
-<ul>
-  <li><b>controller</b>: camadas de controle da API (<code>FuncionarioController</code>)</li>
-  <li><b>service</b>: regras de negócio (<code>FuncionarioService</code>)</li>
-  <li><b>dto</b>: objetos de entrada/saída da API</li>
-  <li><b>model</b>: entidade <code>Funcionario</code> e enum <code>StatusFuncionario</code></li>
-  <li><b>mapper</b>: conversão entre DTO e entidade</li>
-  <li><b>repository</b>: interface JPA para acesso ao banco de dados</li>
-</ul>
-
-<hr>
 
 <h2>📌 Validações</h2>
 <ul>
