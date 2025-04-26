@@ -16,7 +16,7 @@
 <hr>
 
 <h2>🏁 Como executar</h2>
-<pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git
+<pre><code>git clone https://github.com/IsaacSales15/rh-api.git
 cd seu-repositorio
 ./mvnw spring-boot:run
 </code></pre>
